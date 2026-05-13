@@ -79,38 +79,39 @@ class CafeApplication : Application() {
         CoroutineScope(Dispatchers.IO).launch {
             val dao = database.userDao()
 
-            // Usuarios de la app — fotos genéricas via pravatar.cc
-            // Substituir foto por "https://github.com/USERNAME.png" cuando estén disponibles
+            val baseUrl = "https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/photos"
+
             val semilla = listOf(
                 Usuario(
                     nombre = "Anna Carolina",
                     correo = "anna.carolina@cafe.mx",
                     contrasena = "Anna123",
-                    foto = "https://i.pravatar.cc/150?u=anna.carolina@cafe.mx"
+                    foto = "$baseUrl/anna.jpg"
                 ),
                 Usuario(
                     nombre = "Pedro Soria",
                     correo = "pedro.soria@cafe.mx",
                     contrasena = "Pedro123",
-                    foto = "https://i.pravatar.cc/150?u=pedro.soria@cafe.mx"
+                    foto = "$baseUrl/pedro.jpg"
                 ),
                 Usuario(
                     nombre = "Raquel Garza",
                     correo = "raquel.garza@cafe.mx",
                     contrasena = "Raquel23",
-                    foto = "https://i.pravatar.cc/150?u=raquel.garza@cafe.mx"
+                    foto = "$baseUrl/raquel.jpg"
                 ),
                 Usuario(
                     nombre = "Douglas Oliveira",
                     correo = "douglas.oliveira@cafe.mx",
                     contrasena = "Douglas123",
-                    foto = "https://i.pravatar.cc/150?u=douglas.oliveira@cafe.mx"
+                    foto = "$baseUrl/douglas.jpg"
                 ),
                 Usuario(
                     nombre = "Jorge Alanis",
                     correo = "jorge.alanis@cafe.mx",
                     contrasena = "Jorge123",
-                    foto = "https://i.pravatar.cc/150?u=jorge.alanis@cafe.mx"
+                    // Sin foto disponible, usa el ícono por defecto
+                    foto = ""
                 )
             )
 

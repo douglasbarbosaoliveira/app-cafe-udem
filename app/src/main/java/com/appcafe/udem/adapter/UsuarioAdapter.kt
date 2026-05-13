@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.appcafe.udem.R
 import com.appcafe.udem.data.local.entities.Usuario
 import com.appcafe.udem.databinding.ItemUsuarioBinding
 
@@ -13,7 +15,7 @@ import com.appcafe.udem.databinding.ItemUsuarioBinding
 class UsuarioAdapter(
     private val amigosIds: Set<Int>,
     private val onToggleAmigo: (Usuario, Boolean) -> Unit,
-    private val onVerPerfil: (Usuario) -> Unit  // <- nuevo: abrir perfil del usuario
+    private val onVerPerfil: (Usuario) -> Unit
 ) : ListAdapter<Usuario, UsuarioAdapter.ViewHolder>(DIFF) {
 
     private val estadoAmigos = mutableSetOf<Int>().apply { addAll(amigosIds) }
@@ -24,6 +26,13 @@ class UsuarioAdapter(
         fun bind(item: Usuario) {
             binding.txtNombre.text = item.nombre
             binding.txtCorreo.text = item.correo
+
+            // Cargar foto del usuario o mostrar ícono por defecto
+            if (!item.foto.isNullOrEmpty()) {
+                binding.imgUsuario.load(item.foto)
+            } else {
+                binding.imgUsuario.setImageResource(R.drawable.ic_user)
+            }
 
             val esAmigo = estadoAmigos.contains(item.id)
             actualizarBoton(esAmigo)
@@ -36,7 +45,7 @@ class UsuarioAdapter(
                 onToggleAmigo(item, !ahora)
             }
 
-            // Al tocar el nombre o el item, abrir el perfil del usuario
+            // Al tocar el item, abrir el perfil del usuario
             binding.root.setOnClickListener {
                 onVerPerfil(item)
             }
@@ -46,18 +55,18 @@ class UsuarioAdapter(
             if (esAmigo) {
                 binding.btnAgregar.text = "Amigo ✓"
                 binding.btnAgregar.setBackgroundColor(
-                    binding.root.context.getColor(com.appcafe.udem.R.color.GrayButtons)
+                    binding.root.context.getColor(R.color.GrayButtons)
                 )
                 binding.btnAgregar.setTextColor(
-                    binding.root.context.getColor(com.appcafe.udem.R.color.black)
+                    binding.root.context.getColor(R.color.black)
                 )
             } else {
                 binding.btnAgregar.text = "Agregar"
                 binding.btnAgregar.setBackgroundColor(
-                    binding.root.context.getColor(com.appcafe.udem.R.color.Red)
+                    binding.root.context.getColor(R.color.Red)
                 )
                 binding.btnAgregar.setTextColor(
-                    binding.root.context.getColor(com.appcafe.udem.R.color.white)
+                    binding.root.context.getColor(R.color.white)
                 )
             }
         }
