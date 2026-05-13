@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- HEADER -->
+    <include
+        android:id="@+id/header"
+        layout="@layout/header_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- CARD -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/footer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- TÍTULO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:foreground="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Términos y Condiciones"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/GrayText"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/GrayButtons"/>
+
+        <!-- TEXTO -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:lineSpacingExtra="4dp"
+                android:text="
+1. Aceptación de los términos
+Al utilizar esta aplicación, aceptas cumplir con estos términos y condiciones.
+
+2. Uso del servicio
+La aplicación está destinada únicamente para uso personal y no comercial.
+
+3. Privacidad
+Respetamos tu privacidad. La información recopilada será utilizada únicamente para mejorar tu experiencia dentro de la app.
+
+4. Contenido
+El usuario es responsable del contenido que publica. Nos reservamos el derecho de eliminar contenido inapropiado.
+
+5. Modificaciones
+Podemos actualizar estos términos en cualquier momento sin previo aviso.
+
+6. Responsabilidad
+No nos hacemos responsables por daños derivados del uso de la aplicación.
+
+7. Contacto
+Si tienes dudas, puedes contactarnos a través de la sección de soporte.
+
+..." />
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <!-- FOOTER -->
+    <include
+        android:id="@+id/footer"
+        layout="@layout/view_footer"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

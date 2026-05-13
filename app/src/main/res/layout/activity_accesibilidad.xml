@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/botonRegresar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Regresar"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Accesibilidad"
+            android:textColor="@color/Red"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Ajusta la experiencia de la aplicación según tus necesidades."
+            android:textColor="@color/GrayText"
+            android:textSize="15sp" />
+
+        <!-- Activa el tema oscuro en toda la app -->
+        <Switch
+            android:id="@+id/switchDarkMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Modo Oscuro"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!-- Activa el modo oscuro con colores más vibrantes para mayor contraste -->
+        <Switch
+            android:id="@+id/switchAltoContraste"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Alto contraste"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!-- Aumenta el tamaño de fuente en toda la app -->
+        <Switch
+            android:id="@+id/switchTextoGrande"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Texto grande"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!-- Desactiva las animaciones de transición entre pantallas -->
+        <Switch
+            android:id="@+id/switchReducirAnimaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Reducir animaciones"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</ScrollView>

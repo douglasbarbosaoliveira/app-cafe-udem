@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <application
+        android:name=".CafeApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Cafe"
+        tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
+
+        <!-- Splash / entrada: redirige a Login o Home según sesión -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Auth -->
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.RegisterActivity" />
+        <activity android:name=".view.OlvidoContrasenaActivity" />
+
+        <!-- Principal -->
+        <activity android:name=".view.MainContainerActivity" />
+        <activity android:name=".view.HomeActivity" />
+
+        <!-- Cafeterías -->
+        <activity android:name=".view.SearchActivity" />
+        <activity android:name=".view.DetailCafeteriaActivity" />
+
+        <!-- Favoritos -->
+        <activity android:name=".view.FavoritosActivity" />
+
+        <!-- Perfil y configuración -->
+        <activity android:name=".view.PerfilActivity" />
+        <activity android:name=".view.ConfiguracionActivity" />
+        <activity android:name=".view.AccesibilidadActivity" />
+        <activity android:name=".view.CambiarContrasenaActivity" />
+        <activity android:name=".view.ContactanosActivity" />
+
+        <!-- Comunidad -->
+        <activity android:name=".view.ComunidadActivity" />
+        <activity android:name=".view.EventosComunidadActivity" />
+
+        <!-- Usuarios -->
+        <activity android:name=".view.UsuariosActivity"/>
+        <activity android:name=".view.UserProfileActivity" />
+
+        <!-- Reseñas -->
+        <activity android:name=".view.AgregarResenaActivity" />
+        <activity android:name=".view.VerResenasActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

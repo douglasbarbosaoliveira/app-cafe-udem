@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Negro se convierte en blanco para textos y fondos invertidos -->
+    <color name="black">#FFFFFFFF</color>
+
+    <!-- Blanco se convierte en gris oscuro para fondos de pantalla -->
+    <color name="white">#FF1C1C1E</color>
+
+    <!-- Rojo se aclara ligeramente para mejor visibilidad en fondo oscuro -->
+    <color name="Red">#FF4545</color>
+
+    <!-- Gris claro se convierte en gris oscuro para fondos de tarjetas -->
+    <color name="Gray">#FF2C2C2E</color>
+
+    <!-- Texto gris se aclara para mantener legibilidad sobre fondo oscuro -->
+    <color name="GrayText">#ABABAB</color>
+
+    <!-- Amarillo se mantiene igual, ya contrasta bien en fondo oscuro -->
+    <color name="Yellow">#FBBE21</color>
+
+    <!-- Botones grises se oscurecen para integrarse al tema oscuro -->
+    <color name="GrayButtons">#3A3A3C</color>
+
+    <!-- Inputs se oscurecen para diferenciarse del fondo -->
+    <color name="GrayInputs">#FF2C2C2E</color>
+
+    <!-- Azul se aclara ligeramente para mejor contraste en fondo oscuro -->
+    <color name="Blue">#409CFF</color>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="150dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Warm coffee background -->
+    <path
+        android:fillColor="#C8956A"
+        android:pathData="M0,0h24v24H0z"/>
+
+    <!-- Material Design "local_cafe" icon in white -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.85"
+        android:pathData="M20,3H4v10c0,2.21,1.79,4,4,4h6c2.21,0,4,-1.79,4,-4v-3h2c1.11,0,2,-0.89,2,-2V5c0,-1.11,-0.89,-2,-2,-2zm0,5h-2V5h2v3zM4,19h16v2H4z"/>
+</vector>
