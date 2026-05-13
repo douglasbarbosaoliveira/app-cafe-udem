@@ -2,7 +2,7 @@
   <img src="app/src/main/res/mipmap-xxxhdpi/logo_cafe.webp" width="150px" alt="Café Logo">
 </p>
 
-<h1 align="center">☕ Café — Guía de Cafeterías en Monterrey | Coffee Shop Guide | Guia de Cafeterias</h1>
+<h1 align="center">Café — Guía de Cafeterías en Monterrey | Coffee Shop Guide | Guia de Cafeterias</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Android-Kotlin-7F52FF.svg?logo=kotlin" alt="Kotlin">
@@ -16,7 +16,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Tests-Unit%20%26%20Espresso-success.svg" alt="Tests">
   <img src="https://img.shields.io/badge/Sensor-Light%20Sensor-lightgrey.svg" alt="Sensor">
-  <img src="https://img.shields.io/badge/Notifications-FCM-orange.svg" alt="Notifications">
+  <img src="https://img.shields.io/badge/Notifications-Bienvenida-orange.svg" alt="Notifications">
   <img src="https://img.shields.io/badge/Min%20SDK-24-informational.svg" alt="Min SDK">
 </p>
 
@@ -42,13 +42,30 @@
 
 Café es una aplicación Android que funciona como guía de cafeterías en el área metropolitana de Monterrey. Permite encontrar cafeterías cercanas en el mapa, consultar información detallada de cada lugar, dejar reseñas, guardar favoritos y conectarse con una comunidad de amantes del café.
 
+### Screenshots
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/login.png" width="180px" alt="Login"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/cafe_cadastro.png" width="180px" alt="Registro"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/cafe_home.png" width="180px" alt="Home"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/list_cafes.png" width="180px" alt="Lista de Cafeterías"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/ubicacion_cafe.png" width="180px" alt="Detalle de Cafetería"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/comunidad.png" width="180px" alt="Comunidad"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/list_users.png" width="180px" alt="Lista de Usuarios"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/user_profile.png" width="180px" alt="Perfil de Usuario"/>
+</p>
+
 ### Funcionalidades implementadas
 
 **🗺️ Mapa y ubicación**
 Muestra un mapa interactivo con marcadores de cafeterías cercanas a la ubicación del usuario, usando Google Maps SDK y Places API (New).
 
 **🔍 Búsqueda**
-Permite buscar cafeterías por nombre desde una pantalla dedicada.
+Permite buscar cafeterías por nombre y usuarios desde una pantalla dedicada.
 
 **☕ Detalle de cafetería**
 Muestra nombre, dirección, calificación, fotos, horario, teléfono y sitio web obtenidos desde la Places API.
@@ -60,7 +77,10 @@ Los usuarios pueden escribir reseñas con calificación de estrellas y comentari
 El usuario puede marcar cafeterías como favoritas y acceder a ellas rápidamente.
 
 **👤 Perfil de usuario**
-Pantalla de perfil con nombre, correo electrónico y foto tomada desde la cámara del dispositivo.
+Pantalla de perfil con nombre, correo electrónico, foto y estadísticas (cafés visitados, favoritos, reseñas).
+
+**👥 Perfil público**
+Al tocar un usuario en la lista, se abre su perfil público con sus estadísticas.
 
 **👥 Comunidad**
 Sección donde se muestran eventos y reuniones para que los amantes del café se encuentren.
@@ -69,7 +89,7 @@ Sección donde se muestran eventos y reuniones para que los amantes del café se
 Al abrir la app, el usuario recibe una notificación de bienvenida invitándolo a revisar los eventos del día.
 
 **🌙 Sensor de luz**
-La app detecta ambientes oscuros usando el sensor de luz del dispositivo. Si la luminosidad es muy baja, sugiere activar el Modo Oscuro mediante un Snackbar.
+La app detecta ambientes oscuros usando el sensor de luz del dispositivo y sugiere activar el Modo Oscuro mediante un Snackbar.
 
 **♿ Accesibilidad**
 Pantalla de accesibilidad con opciones funcionales: Modo Oscuro, Alto Contraste, Texto Grande y Reducir Animaciones.
@@ -81,8 +101,8 @@ Registro e inicio de sesión con correo y contraseña. Los datos se almacenan lo
 
 | Tecnología | Uso en la app |
 |---|---|
-| Activities | Pantalla contenedora de navegación (`MainContainerActivity`) y pantallas secundarias (Login, Detalle, Configuración, etc.) |
-| Fragments | Las 5 pestañas principales de navegación: Home, Buscar, Comunidad, Favoritos y Perfil, alojadas en `MainContainerActivity` |
+| Activities | Pantallas principales del flujo |
+| Fragments | 5 Fragments en MainContainerActivity |
 | ViewBinding | Acceso seguro a vistas (sin `findViewById`) |
 | RecyclerView | Listas de cafeterías, reseñas, favoritos y eventos |
 | Room / SQLite | Persistencia local de usuarios, reseñas y favoritos |
@@ -114,24 +134,20 @@ Registro e inicio de sesión con correo y contraseña. Los datos se almacenan lo
 ### Arquitectura MVVM
 
 ```
-View
- ├── Activities (MainContainerActivity, Login, Detalle, Configuración…)
- │       └── Fragments (Home, Buscar, Comunidad, Favoritos, Perfil)
- │
- ▼
+View (Activities + Fragments)
+    │
+    ▼
 ViewModel (lógica + LiveData)
- │
- ▼
+    │
+    ▼
 Repository
- ├── Room (base de datos local)
- └── Retrofit (Places API)
+    ├── Room (base de datos local)
+    └── Retrofit (Places API)
 ```
 
 ```
 com.appcafe.udem/
-├── view/
-│   ├── fragment/   → Los 5 Fragments de navegación principal
-│   └── ...         → Activities secundarias
+├── view/           → Activities + fragment/
 ├── viewmodel/      → ViewModels con LiveData
 ├── data/
 │   ├── local/      → Room: entities, DAOs, AppDatabase
@@ -168,8 +184,8 @@ Build → Sync Project with Gradle Files → ▶ Run
 
 **Credenciales de prueba**
 ```
-Correo:     ana@cafe.mx
-Contraseña: Ana123
+Correo:     anna.carolina@cafe.mx
+Contraseña: Anna123
 ```
 
 ---
@@ -189,13 +205,30 @@ Contraseña: Ana123
 
 Café is an Android application that serves as a coffee shop guide for the Monterrey metropolitan area. It allows users to find nearby coffee shops on a map, view detailed information, leave reviews, save favorites, and connect with a community of coffee lovers.
 
+### Screenshots
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/login.png" width="180px" alt="Login"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/cafe_cadastro.png" width="180px" alt="Register"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/cafe_home.png" width="180px" alt="Home"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/list_cafes.png" width="180px" alt="Coffee Shop List"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/ubicacion_cafe.png" width="180px" alt="Coffee Shop Detail"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/comunidad.png" width="180px" alt="Community"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/list_users.png" width="180px" alt="User List"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/user_profile.png" width="180px" alt="User Profile"/>
+</p>
+
 ### Implemented Features
 
 **🗺️ Map & Location**
 Displays an interactive map with markers for nearby coffee shops based on the user's location, using Google Maps SDK and Places API (New).
 
 **🔍 Search**
-Allows searching for coffee shops by name from a dedicated screen.
+Allows searching for coffee shops by name and users from a dedicated screen.
 
 **☕ Coffee Shop Detail**
 Shows the name, address, rating, photos, schedule, phone number, and website fetched from the Places API.
@@ -207,7 +240,10 @@ Users can write reviews with a star rating and comment, stored locally using Roo
 Users can mark coffee shops as favorites for quick access.
 
 **👤 User Profile**
-Profile screen with name, email, and a photo taken directly from the device camera.
+Profile screen with name, email, photo, and statistics (visited cafés, favorites, reviews).
+
+**👥 Public Profile**
+Tapping a user in the list opens their public profile with statistics.
 
 **👥 Community**
 Community section displaying events and meetups for coffee lovers to connect.
@@ -224,12 +260,12 @@ Accessibility screen with functional options: Dark Mode, High Contrast, Large Te
 **🔐 Authentication**
 Registration and login with email and password, stored locally using Room.
 
-### Technologies Used
+### Technologies
 
 | Technology | Usage |
 |---|---|
-| Activities | Navigation container (`MainContainerActivity`) and secondary screens (Login, Detail, Settings, etc.) |
-| Fragments | The 5 main navigation tabs: Home, Search, Community, Favorites, and Profile, hosted inside `MainContainerActivity` |
+| Activities | Main app screens |
+| Fragments | 5 Fragments in MainContainerActivity |
 | ViewBinding | Safe view access (no `findViewById`) |
 | RecyclerView | Lists of coffee shops, reviews, favorites, events |
 | Room / SQLite | Local persistence of users, reviews, favorites |
@@ -258,34 +294,18 @@ Registration and login with email and password, stored locally using Room.
 `app/src/androidTest/java/com/appcafe/udem/`
 - 5 UI tests on `LoginActivity` with Espresso
 
-### MVVM Architecture
+### 🏗️ MVVM Architecture
 
 ```
-View
- ├── Activities (MainContainerActivity, Login, Detail, Settings…)
- │       └── Fragments (Home, Search, Community, Favorites, Profile)
- │
- ▼
+View (Activities + Fragments)
+    │
+    ▼
 ViewModel (logic + LiveData)
- │
- ▼
+    │
+    ▼
 Repository
- ├── Room (local database)
- └── Retrofit (Places API)
-```
-
-```
-com.appcafe.udem/
-├── view/
-│   ├── fragment/   → The 5 main navigation Fragments
-│   └── ...         → Secondary Activities
-├── viewmodel/      → ViewModels with LiveData
-├── data/
-│   ├── local/      → Room: entities, DAOs, AppDatabase
-│   ├── remote/     → Retrofit: ApiService, response models
-│   └── repository/ → Repositories
-├── adapter/        → RecyclerView Adapters
-└── model/          → UI data models
+    ├── Room (local database)
+    └── Retrofit (Places API)
 ```
 
 ### How to Run the Project
@@ -315,8 +335,8 @@ Build → Sync Project with Gradle Files → ▶ Run
 
 **Test Credentials**
 ```
-Email:    ana@cafe.mx
-Password: Ana123
+Email:    anna.carolina@cafe.mx
+Password: Anna123
 ```
 
 ---
@@ -336,13 +356,30 @@ Password: Ana123
 
 Café é um aplicativo Android que funciona como um guia de cafeterias na região metropolitana de Monterrey. Permite encontrar cafeterias próximas no mapa, consultar informações detalhadas, deixar avaliações, salvar favoritos e se conectar com uma comunidade de amantes de café.
 
+### Screenshots
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/login.png" width="180px" alt="Login"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/cafe_cadastro.png" width="180px" alt="Cadastro"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/cafe_home.png" width="180px" alt="Home"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/list_cafes.png" width="180px" alt="Lista de Cafeterias"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/ubicacion_cafe.png" width="180px" alt="Detalhe da Cafeteria"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/comunidad.png" width="180px" alt="Comunidade"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/list_users.png" width="180px" alt="Lista de Usuários"/>
+  <img src="https://raw.githubusercontent.com/douglasbarbosaoliveira/app-cafe-udem/master/screenshots/user_profile.png" width="180px" alt="Perfil de Usuário"/>
+</p>
+
 ### Funcionalidades implementadas
 
 **🗺️ Mapa e localização**
 Exibe um mapa interativo com marcadores das cafeterias mais próximas da localização do usuário, usando o Google Maps SDK e a Places API (New).
 
 **🔍 Busca**
-Permite buscar cafeterias por nome em uma tela dedicada.
+Permite buscar cafeterias por nome e usuários em uma tela dedicada.
 
 **☕ Detalhe da cafeteria**
 Exibe nome, endereço, avaliação, fotos, horário, telefone e site obtidos da Places API.
@@ -354,7 +391,10 @@ Os usuários podem escrever avaliações com nota em estrelas e comentário, sal
 O usuário pode marcar cafeterias como favoritas para acesso rápido.
 
 **👤 Perfil do usuário**
-Tela de perfil com nome, e-mail e foto tirada diretamente pela câmera do dispositivo.
+Tela de perfil com nome, e-mail, foto e estatísticas (cafés visitados, favoritos, avaliações).
+
+**👥 Perfil público**
+Ao tocar em um usuário na lista, abre seu perfil público com estatísticas.
 
 **👥 Comunidade**
 Seção com eventos e encontros para que os amantes de café se reúnam.
@@ -375,8 +415,8 @@ Cadastro e login com e-mail e senha, armazenados localmente com Room.
 
 | Tecnologia | Uso no app |
 |---|---|
-| Activities | Tela contêiner de navegação (`MainContainerActivity`) e telas secundárias (Login, Detalhe, Configurações, etc.) |
-| Fragments | As 5 abas principais de navegação: Home, Busca, Comunidade, Favoritos e Perfil, hospedadas na `MainContainerActivity` |
+| Activities | Telas principais do fluxo |
+| Fragments | 5 Fragments no MainContainerActivity |
 | ViewBinding | Acesso seguro às views (sem `findViewById`) |
 | RecyclerView | Listas de cafeterias, avaliações, favoritos e eventos |
 | Room / SQLite | Persistência local de usuários, avaliações e favoritos |
@@ -405,36 +445,6 @@ Cadastro e login com e-mail e senha, armazenados localmente com Room.
 `app/src/androidTest/java/com/appcafe/udem/`
 - 5 testes de UI na `LoginActivity` com Espresso
 
-### Arquitetura MVVM
-
-```
-View
- ├── Activities (MainContainerActivity, Login, Detalhe, Configurações…)
- │       └── Fragments (Home, Busca, Comunidade, Favoritos, Perfil)
- │
- ▼
-ViewModel (lógica + LiveData)
- │
- ▼
-Repository
- ├── Room (banco de dados local)
- └── Retrofit (Places API)
-```
-
-```
-com.appcafe.udem/
-├── view/
-│   ├── fragment/   → Os 5 Fragments de navegação principal
-│   └── ...         → Activities secundárias
-├── viewmodel/      → ViewModels com LiveData
-├── data/
-│   ├── local/      → Room: entities, DAOs, AppDatabase
-│   ├── remote/     → Retrofit: ApiService, modelos
-│   └── repository/ → Repositories
-├── adapter/        → Adapters do RecyclerView
-└── model/          → Modelos de dados de UI
-```
-
 ### Como executar o projeto
 
 **Requisitos**
@@ -462,8 +472,8 @@ Build → Sync Project with Gradle Files → ▶ Run
 
 **Credenciais de teste**
 ```
-E-mail: ana@cafe.mx
-Senha:  Ana123
+E-mail: anna.carolina@cafe.mx
+Senha:  Anna123
 ```
 
 ---
